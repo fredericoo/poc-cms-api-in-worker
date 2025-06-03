@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Await, Link } from 'react-router';
+import { Await, Link, useLocation } from 'react-router';
 import { getSession } from '~/middleware/auth.server';
 import type { Route } from './+types/$org.pages._index';
 
@@ -21,7 +21,7 @@ export default function Pages({ loaderData }: Route.ComponentProps) {
 	return (
 		<div>
 			<h1>Pages</h1>
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense key={useLocation().key} fallback={<div>Loading...</div>}>
 				<Await resolve={loaderData.pages}>
 					{(pages) => {
 						return (

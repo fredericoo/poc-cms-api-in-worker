@@ -17,11 +17,11 @@ export const loader = ({ context }: Route.LoaderArgs) => {
 	};
 };
 
-export default function Pages({ loaderData }: Route.ComponentProps) {
+export default function Pages({ loaderData, params }: Route.ComponentProps) {
 	return (
 		<div>
 			<h1>Themes</h1>
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense key={params.org} fallback={<div>Loading...</div>}>
 				<Await resolve={loaderData.pages}>
 					{(pages) => {
 						return (

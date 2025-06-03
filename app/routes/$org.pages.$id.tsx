@@ -15,11 +15,11 @@ export const loader = ({ context, params }: Route.LoaderArgs) => {
 	};
 };
 
-export default function Page({ loaderData }: Route.ComponentProps) {
+export default function Page({ loaderData, params }: Route.ComponentProps) {
 	return (
 		<div>
 			<h1>Page</h1>
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense key={params.id} fallback={<div>Loading...</div>}>
 				<Await resolve={loaderData.page}>{(page) => <div>{page.title}</div>}</Await>
 			</Suspense>
 		</div>
